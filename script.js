@@ -10,8 +10,15 @@ let gameSpeed = 2000;
 let isGameOver = false;
 let obstaclePassed = false;
 
+// Detectar pulsación de la barra espaciadora o toque en la pantalla
 document.addEventListener("keydown", function(event) {
     if (event.code === "Space" && !isGameOver) {
+        jump();
+    }
+});
+
+document.addEventListener("touchstart", function(event) {
+    if (!isGameOver) {
         jump();
     }
 });
@@ -27,25 +34,18 @@ function jump() {
 }
 
 let isAlive = setInterval(function() {
-    // Obtener la posición Y del personaje
     let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
-
-    // Obtener la posición X del obstáculo
     let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue("left"));
 
-    // Detectar colisión
     if (obstacleLeft < 80 && obstacleLeft > 50 && characterTop >= 150) {
-        // Colisión detectada
         isGameOver = true;
         endGame();
     } else if (obstacleLeft < 50 && !obstaclePassed && !isGameOver) {
-        // Incrementar la puntuación cuando el obstáculo es esquivado
         score++;
         scoreElement.textContent = "Puntos: " + score;
         obstaclePassed = true;
     }
 
-    // Resetear el flag de obstáculo pasado cuando el obstáculo sale de la pantalla
     if (obstacleLeft <= 0) {
         obstaclePassed = false;
     }
@@ -77,16 +77,5 @@ function endGame() {
 }
 
 function restartGame() {
-    score = 0;
-    time = 0;
-    gameSpeed = 2000;
-    isGameOver = false;
-    obstaclePassed = false;
-
-    scoreElement.textContent = "Puntos: " + score;
-    timerElement.textContent = "Tiempo: 0s";
-    obstacle.style.display = "block";
-    obstacle.style.animation = `moveObstacle ${gameSpeed / 1000}s infinite linear`;
-    restartButton.style.display = "none";
-    location.reload();
+    location.reload(); // Recarga la página para reiniciar el juego
 }
