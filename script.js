@@ -2,14 +2,16 @@ const character = document.getElementById("character");
 const obstacle = document.getElementById("obstacle");
 const scoreElement = document.getElementById("score");
 const timerElement = document.getElementById("timer");
+const restartButton = document.getElementById("restart-button");
 
 let score = 0;
 let time = 0;
 let gameSpeed = 2000;
 let isGameOver = false;
+let obstaclePassed = false;
 
 document.addEventListener("keydown", function(event) {
-    if (event.code === "Space") {
+    if (event.code === "Space" && !isGameOver) {
         jump();
     }
 });
@@ -34,18 +36,21 @@ let isAlive = setInterval(function() {
     // Detectar colisión
     if (obstacleLeft < 80 && obstacleLeft > 50 && characterTop >= 150) {
         // Colisión detectada
-        alert("¡Game Over!");
         isGameOver = true;
-        obstacle.style.animation = "none";
-        obstacle.style.display = "none";
-    } else if (obstacleLeft < 50 && !isGameOver) {
+        endGame();
+    } else if (obstacleLeft < 50 && !obstaclePassed && !isGameOver) {
         // Incrementar la puntuación cuando el obstáculo es esquivado
         score++;
         scoreElement.textContent = "Puntos: " + score;
+        obstaclePassed = true;
+    }
+
+    // Resetear el flag de obstáculo pasado cuando el obstáculo sale de la pantalla
+    if (obstacleLeft <= 0) {
+        obstaclePassed = false;
     }
 }, 10);
 
-// Función para incrementar la dificultad
 function increaseDifficulty() {
     if (isGameOver) return;
     if (gameSpeed > 800) {
@@ -54,7 +59,6 @@ function increaseDifficulty() {
     }
 }
 
-// Reloj del juego y aumento de dificultad con el tiempo
 let gameTime = setInterval(function() {
     if (isGameOver) return;
     time++;
@@ -64,3 +68,24 @@ let gameTime = setInterval(function() {
         increaseDifficulty();
     }
 }, 1000);
+
+function endGame() {
+    alert(`¡Game Over! Obtuviste ${score} puntos.`);
+    obstacle.style.animation = "none";
+    obstacle.style.display = "none";
+    restartButton.style.display = "block";
+}
+
+function restartGame() {
+    score = 0;
+    time = 0;
+    gameSpeed = 2000;
+    isGameOver = false;
+    obstaclePassed = false;
+
+    scoreElement.textContent = "Puntos: " + score;
+    timerElement.textContent = "Tiempo: 0s";
+    obstacle.style.display = "block";
+    obstacle.style.animation = `moveObstacle ${gameSpeed / 1000}s infinite linear`;
+    restartButton.style.display = "none";
+}
