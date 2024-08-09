@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minijuego: Salta los Obstáculos</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <div class="game-container">
+        <div class="header">
+            <div class="score" id="score">Puntos: 0</div>
+            <div class="timer" id="timer">Tiempo: 0s</div>
+        </div>
+        <div class="instructions">Pulsa la barra espaciadora para saltar</div>
         <div class="character" id="character"></div>
         <div class="obstacle" id="obstacle"></div>
     </div>
 
     <script src="script.js"></script>
 </body>
-
 </html>
