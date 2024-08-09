@@ -88,4 +88,5 @@ function restartGame() {
     obstacle.style.display = "block";
     obstacle.style.animation = `moveObstacle ${gameSpeed / 1000}s infinite linear`;
     restartButton.style.display = "none";
+    location.reload();
 }
