@@ -6,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #000;
+    background: rgb(241, 241, 241);
     font-family: Arial, sans-serif;
 }
 
