@@ -24,7 +24,7 @@ document.addEventListener("touchstart", function(event) {
 });
 
 function jump() {
-    if (character.classList != "jump") {
+    if (!character.classList.contains("jump")) {
         character.classList.add("jump");
 
         setTimeout(function() {
