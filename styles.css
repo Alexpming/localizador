@@ -55,7 +55,7 @@ body {
 }
 .jump {
     animation: jumpAnimation 0.5s;
-    background-image: url('images/character_jump.png');
+    background-image: url('./character_jump.png');
 }
 
 .obstacle {
