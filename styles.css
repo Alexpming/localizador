@@ -49,7 +49,7 @@ body {
     left: 50px;
     width: 50px;
     height: 50px;
-    background-image: url('images/character_normal.png');
+    background-image: url('./character_normal.gif');
     background-size: contain;
     background-repeat: no-repeat;
 }
