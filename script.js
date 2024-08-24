@@ -79,3 +79,26 @@ function endGame() {
 function restartGame() {
     location.reload(); // Recarga la página para reiniciar el juego
 }
+
+function sendMessage() {
+    const chatInput = document.getElementById('chat-input');
+    const chatBox = document.getElementById('chat-box');
+    
+    // Obtener el mensaje
+    const message = chatInput.value.trim();
+
+    if (message !== '') {
+        // Crear un nuevo elemento de mensaje
+        const messageElement = document.createElement('p');
+        messageElement.textContent = message;
+        
+        // Agregar el mensaje al chat
+        chatBox.appendChild(messageElement);
+        
+        // Limpiar el campo de entrada
+        chatInput.value = '';
+        
+        // Hacer scroll automático hacia abajo
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+}
